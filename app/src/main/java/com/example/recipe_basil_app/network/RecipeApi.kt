@@ -16,6 +16,6 @@ interface RecipeApi {
     @GET("filter.php")
     suspend fun filterByCategory(@Query("c") category: String): MealByCategory
 
-    @GET("https://www.themealdb.com/api/json/v1/1/lookup.php")
+    @GET("lookup.php")
     suspend fun getRecipeById(@Query("i") id: String): MealById
 }
