@@ -1,4 +1,4 @@
-package com.example.recipe_basil_app.ui.recipes.recipe.recipedetails
+package com.example.recipe_basil_app.ui.carousel.recipe.recipedetails
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle

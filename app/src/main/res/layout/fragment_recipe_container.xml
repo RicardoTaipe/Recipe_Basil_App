@@ -15,7 +15,7 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.recipes.container.RecipeContainerFragment">
+            tools:context=".ui.carousel.container.RecipeContainerFragment">
 
             <TextView
                 android:id="@+id/title_app"
@@ -51,7 +51,7 @@
         <!-- Bottom sheet container. -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/recipe_bottom_sheet"
-            android:name="com.example.recipe_basil_app.ui.recipes.recipe.recipedetails.RecipeDetailsFragment"
+            android:name="com.example.recipe_basil_app.ui.carousel.recipe.recipedetails.RecipeDetailsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"

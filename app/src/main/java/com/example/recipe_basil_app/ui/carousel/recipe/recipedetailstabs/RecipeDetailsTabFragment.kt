@@ -1,4 +1,4 @@
-package com.example.recipe_basil_app.ui.recipes.recipe.recipedetailstabs
+package com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs
 
 import android.os.Bundle
 import android.view.LayoutInflater

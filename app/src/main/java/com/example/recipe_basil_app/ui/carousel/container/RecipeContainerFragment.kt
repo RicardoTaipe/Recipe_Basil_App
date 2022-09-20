@@ -1,4 +1,4 @@
-package com.example.recipe_basil_app.ui.recipes.container
+package com.example.recipe_basil_app.ui.carousel.container
 
 import android.content.res.Resources
 import android.os.Bundle

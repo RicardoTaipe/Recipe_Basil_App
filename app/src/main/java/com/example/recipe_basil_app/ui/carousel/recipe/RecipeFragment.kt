@@ -1,4 +1,4 @@
-package com.example.recipe_basil_app.ui.recipes.recipe
+package com.example.recipe_basil_app.ui.carousel.recipe
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.recipe_basil_app.databinding.FragmentRecipeBinding
 import com.example.recipe_basil_app.util.bindImage
 

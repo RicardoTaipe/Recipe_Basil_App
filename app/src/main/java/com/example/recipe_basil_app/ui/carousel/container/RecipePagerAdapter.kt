@@ -1,10 +1,10 @@
-package com.example.recipe_basil_app.ui.recipes.container
+package com.example.recipe_basil_app.ui.carousel.container
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.recipe_basil_app.network.response.Meal
-import com.example.recipe_basil_app.ui.recipes.recipe.RecipeFragment
+import com.example.recipe_basil_app.ui.carousel.recipe.RecipeFragment
 
 
 class RecipePagerAdapter(fa: FragmentActivity, var recipes: List<Meal>?) :

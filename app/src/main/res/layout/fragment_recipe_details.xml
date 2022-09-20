@@ -20,7 +20,7 @@
                 android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:context=".ui.recipes.container.RecipeContainerFragment">
+                tools:context=".ui.carousel.container.RecipeContainerFragment">
 
                 <TextView
                     android:id="@+id/title_app"
@@ -60,7 +60,7 @@
         <!-- Bottom sheet container. -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/tabs_bottom_sheet"
-            android:name="com.example.recipe_basil_app.ui.recipes.recipe.recipedetailstabs.RecipeDetailsTabFragment"
+            android:name="com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.RecipeDetailsTabFragment"
             android:layout_width="match_parent"
             android:layout_gravity="bottom"
             android:layout_height="match_parent"

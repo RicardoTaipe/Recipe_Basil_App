@@ -6,14 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.children
 import androidx.fragment.app.setFragmentResultListener
-import androidx.recyclerview.widget.RecyclerView
-import com.example.recipe_basil_app.R
 import com.example.recipe_basil_app.databinding.FragmentHomeBinding
-import com.example.recipe_basil_app.ui.menudrawer.CATEGORY_SELECTED
-import com.example.recipe_basil_app.ui.recipes.container.PAGE_SELECTED
-import com.example.recipe_basil_app.ui.recipes.container.REQUEST_PAGE
+import com.example.recipe_basil_app.ui.carousel.container.PAGE_SELECTED
+import com.example.recipe_basil_app.ui.carousel.container.REQUEST_PAGE
 
 
 class HomeFragment : Fragment() {

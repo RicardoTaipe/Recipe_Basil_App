@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.recipe_basil_app.ui.recipes.recipe.RecipeViewModel" />
+            type="com.example.recipe_basil_app.ui.carousel.recipe.RecipeViewModel" />
 
     </data>
 

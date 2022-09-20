@@ -1,4 +1,4 @@
-package com.example.recipe_basil_app.ui.recipes.recipe
+package com.example.recipe_basil_app.ui.carousel.recipe
 
 import android.util.Log
 import androidx.lifecycle.LiveData
