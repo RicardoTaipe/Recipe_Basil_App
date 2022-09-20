@@ -1,4 +1,4 @@
-package com.example.recipe_basil_app.ui.recipes.recipe
+package com.example.recipe_basil_app.ui.recipes.recipe.recipedetails
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -10,9 +10,6 @@ import com.example.recipe_basil_app.R
 
 class RecipeDetailsFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RecipeDetailsFragment()
-    }
 
     private lateinit var viewModel: RecipeDetailsViewModel
 
@@ -23,10 +20,9 @@ class RecipeDetailsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_recipe_details, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(RecipeDetailsViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
