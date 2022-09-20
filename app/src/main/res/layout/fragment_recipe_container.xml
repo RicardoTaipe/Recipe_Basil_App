@@ -49,23 +49,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Bottom sheet container. -->
-        <androidx.core.widget.NestedScrollView
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/recipe_bottom_sheet"
-            android:layout_gravity="bottom"
+            android:name="com.example.recipe_basil_app.ui.recipes.recipe.recipedetails.RecipeDetailsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:behavior_hideable="false"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            tools:behavior_peekHeight="250dp">
-            <!-- Bottom sheet content -->
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_container_recipe_container"
-                android:name="com.example.recipe_basil_app.ui.recipes.recipe.RecipeDetailsFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_recipe_details" />
-
-        </androidx.core.widget.NestedScrollView>
+            tools:behavior_peekHeight="250dp"
+            tools:layout="@layout/fragment_recipe_details" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

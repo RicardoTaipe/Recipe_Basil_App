@@ -3,18 +3,13 @@ package com.example.recipe_basil_app.ui.recipes.container
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
-import androidx.core.widget.NestedScrollView
-import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.*
 import com.example.recipe_basil_app.R
 import com.example.recipe_basil_app.databinding.FragmentRecipeContainerBinding
 import com.example.recipe_basil_app.ui.home.RECIPES_PAGE
@@ -29,7 +24,7 @@ class RecipeContainerFragment : Fragment() {
 
     private val viewModel: RecipeContainerViewModel by viewModels()
     private lateinit var binding: FragmentRecipeContainerBinding
-    private lateinit var sheetBehavior: BottomSheetBehavior<NestedScrollView>
+    private lateinit var sheetBehavior: BottomSheetBehavior<FragmentContainerView>
     private lateinit var pagerAdapter: RecipePagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,18 +65,19 @@ class RecipeContainerFragment : Fragment() {
                 */
             }
         }
+        binding.recipeBottomSheet.setOnClickListener {
+            sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
 
         sheetBehavior = BottomSheetBehavior.from(binding.recipeBottomSheet)
         sheetBehavior.peekHeight =
             (0.35 * Resources.getSystem().displayMetrics.heightPixels).toInt()
         sheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                //Log.d("RecipeFragment",)
-            }
+            override fun onStateChanged(bottomSheet: View, newState: Int) {}
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 Log.d("RecipeFragment", slideOffset.toString())
-                binding.titleApp.translationY = (-binding.titleApp.height * 100).toFloat()
+                binding.titleApp.translationY = (-binding.titleApp.height * slideOffset)
             }
 
         })
@@ -92,7 +88,6 @@ class RecipeContainerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.meals.observe(viewLifecycleOwner) { recipes ->
             recipes?.let {
-                //binding.recipesCarousel.adapter = null
                 pagerAdapter.recipes = it.take(5)
                 it.take(5).forEachIndexed { index, meal ->
                     pagerAdapter.notifyItemChanged(index, meal)
@@ -100,6 +95,7 @@ class RecipeContainerFragment : Fragment() {
                 binding.recipesCarousel.adapter = pagerAdapter
             }
         }
+        viewModel.retrieveRecipesByCategory(null)
     }
 
     companion object {
