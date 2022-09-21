@@ -17,9 +17,9 @@ class LandingPagerAdapter(fa: FragmentActivity) :
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             MENU_PAGE -> {
-                MenuFragment.newInstance()
+                MenuFragment()
             }
-            else -> RecipeContainerFragment.newInstance()
+            else -> RecipeContainerFragment()
         }
     }
 

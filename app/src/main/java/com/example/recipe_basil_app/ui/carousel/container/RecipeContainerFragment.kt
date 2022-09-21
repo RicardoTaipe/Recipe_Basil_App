@@ -2,14 +2,16 @@ package com.example.recipe_basil_app.ui.carousel.container
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.*
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.recipe_basil_app.R
 import com.example.recipe_basil_app.databinding.FragmentRecipeContainerBinding
 import com.example.recipe_basil_app.ui.home.RECIPES_PAGE
@@ -31,7 +33,6 @@ class RecipeContainerFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setFragmentResultListener(REQUEST_CATEGORY) { _, bundle ->
             val category = bundle.getString(CATEGORY_SELECTED)
-            Log.d("RecipeContainerFragment", category.toString())
             category?.let {
                 viewModel.retrieveRecipesByCategory(it)
                 setFragmentResult(REQUEST_PAGE, bundleOf(PAGE_SELECTED to RECIPES_PAGE))
@@ -46,7 +47,7 @@ class RecipeContainerFragment : Fragment() {
     ): View {
         binding = FragmentRecipeContainerBinding.inflate(inflater, container, false)
 
-        pagerAdapter = RecipePagerAdapter(requireActivity(), emptyList())
+        pagerAdapter = RecipePagerAdapter(this, emptyList())
 
         binding.recipesCarousel.adapter = pagerAdapter
         binding.recipesCarousel.offscreenPageLimit = 5
@@ -65,6 +66,12 @@ class RecipeContainerFragment : Fragment() {
                 */
             }
         }
+        binding.recipesCarousel.registerOnPageChangeCallback(object :
+            OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                viewModel.itemSelected(position)
+            }
+        })
         binding.recipeBottomSheet.setOnClickListener {
             sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
@@ -72,16 +79,23 @@ class RecipeContainerFragment : Fragment() {
         sheetBehavior = BottomSheetBehavior.from(binding.recipeBottomSheet)
         sheetBehavior.peekHeight =
             (0.35 * Resources.getSystem().displayMetrics.heightPixels).toInt()
+        val backCallback =
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, false) {
+                sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+
         sheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {}
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                backCallback.isEnabled = newState == BottomSheetBehavior.STATE_EXPANDED
+                requireActivity().findViewById<ViewPager2>(R.id.landing_pager)
+                    .isUserInputEnabled = newState != BottomSheetBehavior.STATE_EXPANDED
+            }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                Log.d("RecipeFragment", slideOffset.toString())
                 binding.titleApp.translationY = (-binding.titleApp.height * slideOffset)
             }
 
         })
-
         return binding.root
     }
 
@@ -98,7 +112,4 @@ class RecipeContainerFragment : Fragment() {
         viewModel.retrieveRecipesByCategory(null)
     }
 
-    companion object {
-        fun newInstance() = RecipeContainerFragment()
-    }
 }

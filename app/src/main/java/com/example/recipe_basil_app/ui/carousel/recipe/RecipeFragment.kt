@@ -5,22 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.example.recipe_basil_app.databinding.FragmentRecipeBinding
-import com.example.recipe_basil_app.util.bindImage
+import com.example.recipe_basil_app.network.response.Meal
+import com.example.recipe_basil_app.util.imageUrl
 
-private const val RECIPE_ID = "RECIPE_ID"
+
+private const val RECIPE = "RECIPE"
 
 class RecipeFragment : Fragment() {
 
     private lateinit var binding: FragmentRecipeBinding
-    private val viewModel: RecipeViewModel by viewModels()
-    private var recipeId: String? = null
+    private var recipe: Meal? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            recipeId = it.getString(RECIPE_ID)
+            recipe = it.getSerializable(RECIPE) as Meal?
         }
     }
 
@@ -29,31 +29,22 @@ class RecipeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRecipeBinding.inflate(inflater, container, false)
-        binding.apply {
-            viewModel = viewModel
-            lifecycleOwner = viewLifecycleOwner
-        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getRecipeDetails(recipeId!!)
-
-        viewModel.recipe.observe(viewLifecycleOwner) { recipe ->
-            recipe?.strMeal?.let {
-                binding.mealName.text = it
-            }
-            bindImage(binding.mealImage, recipe.strMealThumb)
+        recipe?.let {
+            binding.mealName.text = it.strMeal ?: ""
+            binding.mealImage.imageUrl(it.strMealThumb)
         }
-
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(id: String?) = RecipeFragment().apply {
+        fun newInstance(meal: Meal?) = RecipeFragment().apply {
             arguments = Bundle().apply {
-                putString(RECIPE_ID, id)
+                putSerializable(RECIPE, meal)
             }
         }
     }

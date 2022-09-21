@@ -20,10 +20,6 @@ class MenuFragment : Fragment() {
     private lateinit var binding: FragmentMenuBinding
     private val categoryAdapter = MenuAdapter()
 
-    companion object {
-        fun newInstance() = MenuFragment()
-    }
-
     private val viewModel: MenuViewModel by viewModels()
 
     override fun onCreateView(

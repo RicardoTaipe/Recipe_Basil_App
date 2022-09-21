@@ -1,5 +1,6 @@
 package com.example.recipe_basil_app.network.response
 
+import com.example.recipe_basil_app.network.NetworkConstants.IMAGE_BASE_URL
 import com.squareup.moshi.Json
 
 data class Recipe(
@@ -109,4 +110,31 @@ data class Recipe(
     val strTags: String? = null,
     @Json(name = "strYoutube")
     val strYoutube: String? = null
-)
+) {
+    fun getIngredients(): List<IngredientModel> {
+        val regexIngredient = """strIngredient(\d+)=(\w.*?[^,]*)""".toRegex()
+        val regexMeasure = """strMeasure(\d+)=(\w.*?[^,]*)""".toRegex()
+        val text = this.toString()
+        val ingredients =
+            regexIngredient.findAll(text).map { it.groupValues[1] to it.groupValues[2] }.toList()
+        val measures =
+            regexMeasure.findAll(text).map { it.groupValues[1] to it.groupValues[2] }.toList()
+        return ingredients.map { i ->
+            val measure = measures.find { m -> m.first == i.first }
+            val imageUrl = "${IMAGE_BASE_URL}${i.second}.png"
+            IngredientModel(i.second, measure?.second ?: "", imageUrl)
+        }
+
+    }
+
+    fun getDirections(): List<DirectionModel> {
+        val regex = """.*?\.""".toRegex()
+        val text = this.strInstructions
+        val directions = regex.findAll(text.toString())
+            .map { it.value.trim().replace("\\r\\n", "") }.toList()
+        return directions.mapIndexed { index, s -> DirectionModel(index, s) }
+    }
+}
+
+data class IngredientModel(val name: String, val measure: String, val imageUrl: String = "")
+data class DirectionModel(val id: Int, val description: String)

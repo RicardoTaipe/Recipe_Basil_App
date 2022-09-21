@@ -10,8 +10,8 @@ interface RecipeApi {
     @GET("list.php?c=list")
     suspend fun getAllCategories(): Categories
 
-    @GET("filter.php")
-    suspend fun filterByArea(@Query("a") area: String): MealByCategory
+    /*@GET("filter.php")
+    suspend fun filterByArea(@Query("a") area: String): MealByCategory*/
 
     @GET("filter.php")
     suspend fun filterByCategory(@Query("c") category: String): MealByCategory

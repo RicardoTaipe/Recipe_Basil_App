@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.recipe_basil_app.ui.carousel.container.RecipeContainerViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -26,7 +29,8 @@
                     android:id="@+id/title_app"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Creamy Pesto Pasta"
+                    android:text="@{viewModel.recipe.strMeal}"
+                    tools:text="Creamy Pesto Pasta"
                     android:textAlignment="center"
                     android:textSize="32sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +44,7 @@
                     android:layout_height="0dp"
                     android:layout_marginHorizontal="32dp"
                     android:contentDescription="recipe"
+                    android:background="#B9e4c9"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="@id/guideline2"
                     app:layout_constraintDimensionRatio="1:1"
@@ -62,7 +67,6 @@
             android:id="@+id/tabs_bottom_sheet"
             android:name="com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.RecipeDetailsTabFragment"
             android:layout_width="match_parent"
-            android:layout_gravity="bottom"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_recipe_details_tab" />
 
