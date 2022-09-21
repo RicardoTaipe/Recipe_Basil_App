@@ -27,7 +27,7 @@ class RecipeContainerFragment : Fragment() {
     private val viewModel: RecipeContainerViewModel by viewModels()
     private lateinit var binding: FragmentRecipeContainerBinding
     private lateinit var sheetBehavior: BottomSheetBehavior<FragmentContainerView>
-    private lateinit var pagerAdapter: RecipePagerAdapter
+    private lateinit var pagerAdapter: RecipeCarouselAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +47,7 @@ class RecipeContainerFragment : Fragment() {
     ): View {
         binding = FragmentRecipeContainerBinding.inflate(inflater, container, false)
 
-        pagerAdapter = RecipePagerAdapter(this, emptyList())
+        pagerAdapter = RecipeCarouselAdapter()
 
         binding.recipesCarousel.adapter = pagerAdapter
         binding.recipesCarousel.offscreenPageLimit = 5
@@ -102,11 +102,7 @@ class RecipeContainerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.meals.observe(viewLifecycleOwner) { recipes ->
             recipes?.let {
-                pagerAdapter.recipes = it.take(5)
-                it.take(5).forEachIndexed { index, meal ->
-                    pagerAdapter.notifyItemChanged(index, meal)
-                }
-                binding.recipesCarousel.adapter = pagerAdapter
+                pagerAdapter.submitList(it.take(5))
             }
         }
         viewModel.retrieveRecipesByCategory(null)

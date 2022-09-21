@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipe_basil_app.databinding.CarouselItemBinding
 import com.example.recipe_basil_app.network.response.Meal
-import com.example.recipe_basil_app.util.imageUrl
 
 class RecipeCarouselAdapter :
     ListAdapter<Meal, RecipeCarouselAdapter.ViewHolder>(MealDiffCallback) {
@@ -26,9 +25,7 @@ class RecipeCarouselAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(meal: Meal) {
             binding.apply {
-                //carousel = meal
-                mealName.text = meal.strMeal
-                mealImage.imageUrl(meal.strMealThumb)
+                carousel = meal
                 executePendingBindings()
             }
         }
