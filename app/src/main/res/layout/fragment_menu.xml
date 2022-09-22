@@ -16,12 +16,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
+            android:drawablePadding="16dp"
             android:paddingBottom="16dp"
-            android:text="SHOPPING LIST"
-            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:text="@string/shopping_list"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Recipe.Button"
+            android:textColor="?attr/colorOnPrimary"
+            app:drawableTopCompat="@drawable/ic_bookmark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="?attr/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@id/categories_recyclerview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.25" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categories_recyclerview"
@@ -34,6 +47,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/subheadline"
+            app:layout_constraintVertical_bias="0.25"
+            tools:itemCount="4"
             tools:listitem="@layout/category_menu_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
