@@ -21,17 +21,94 @@
         <item name="android:statusBarColor">@color/egg_shell</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <!-- Fonts-->
+        <item name="android:fontFamily">@font/lekton</item>
+        <item name="fontFamily">@font/lekton</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">96sp</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">60sp</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">48sp</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/lekton</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/lekton</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textStyle">bold</item>
         <item name="fontFamily">@font/lekton</item>
         <item name="android:fontFamily">@font/lekton</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.Recipe.Overline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="fontFamily">@font/montserrat_alternates</item>
+        <item name="android:fontFamily">@font/montserrat_alternates</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">10sp</item>
     </style>
 </resources>
-    <!--TODO RESOURCES
-    https://medium.com/over-engineering/setting-up-a-material-components-theme-for-android-fbf7774da739
-    https://material.io/design/color/the-color-system.html
-    https://codelabs.developers.google.com/codelabs/mdc-103-kotlin#2
-    https://material.io/design/material-studies/basil.html#product-architecture
-    https://material.io/design/color/applying-color-to-ui.html#typography-and-iconography
-
-    https://stackoverflow.com/questions/49884648/how-to-mimic-view-pager-with-recycler-view
-
-    -->
