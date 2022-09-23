@@ -2,12 +2,15 @@ package com.example.recipe_basil_app.ui.carousel.container
 
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.annotation.DimenRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.*
 import androidx.viewpager2.widget.ViewPager2
@@ -19,6 +22,7 @@ import com.example.recipe_basil_app.ui.menudrawer.CATEGORY_SELECTED
 import com.example.recipe_basil_app.ui.menudrawer.REQUEST_CATEGORY
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
+
 const val PAGE_SELECTED = "page_selected"
 const val REQUEST_PAGE = "request_page"
 
@@ -28,6 +32,7 @@ class RecipeContainerFragment : Fragment() {
     private lateinit var binding: FragmentRecipeContainerBinding
     private lateinit var sheetBehavior: BottomSheetBehavior<FragmentContainerView>
     private lateinit var pagerAdapter: RecipeCarouselAdapter
+    private lateinit var viewPagerChangeCallback: OnPageChangeCallback
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,35 +55,41 @@ class RecipeContainerFragment : Fragment() {
         pagerAdapter = RecipeCarouselAdapter()
 
         binding.recipesCarousel.adapter = pagerAdapter
-        binding.recipesCarousel.offscreenPageLimit = 5
+
+        lateinit var nameRecipe: TextView
+        lateinit var imageRecipe: ImageView
+
         binding.recipesCarousel.setPageTransformer { page, position ->
-            val name: TextView = page.findViewById(R.id.meal_name)
-            val card: ImageView = page.findViewById(R.id.meal_image)
-            if (position <= 1 && position >= -1) {
-                name.translationX = position * (page.width / 4f)
-                card.translationX = -position * (page.width / 8f)
-                /* If user drags the page right to left :
-                Planet : 0.5 of normal speed
-                Name : 1.25 of normal speed
-                If the user drags the page left to right :
-                Planet: 1.5 of normal speed
-                Name: 0.75 of normal speed
-                */
+            nameRecipe = page.findViewById(R.id.meal_name)
+            imageRecipe = page.findViewById(R.id.meal_image)
+            when {
+                position < -1 -> // [-Infinity,-1) This page is way off-screen to the left.
+                    page.alpha = 1f
+                position <= 1 -> { // [-1,1]
+                    nameRecipe.translationX = position * (page.width)
+                    imageRecipe.translationX = -position * (page.width)
+                }
+                else -> // (1,+Infinity] This page is way off-screen to the right.
+                    page.alpha = 1f
             }
+            Log.d("RecipeContainerFragment", "Po: $position")
         }
-        binding.recipesCarousel.registerOnPageChangeCallback(object :
+        viewPagerChangeCallback = object :
             OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 viewModel.itemSelected(position)
             }
-        })
+        }
+        binding.recipesCarousel.registerOnPageChangeCallback(viewPagerChangeCallback)
         binding.recipeBottomSheet.setOnClickListener {
             sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
         sheetBehavior = BottomSheetBehavior.from(binding.recipeBottomSheet)
+        val bottomSheetRef = 1.0f - getFloatDimension(R.dimen.bottom_sheet_ref)
         sheetBehavior.peekHeight =
-            (0.35 * Resources.getSystem().displayMetrics.heightPixels).toInt()
+            (bottomSheetRef * Resources.getSystem().displayMetrics.heightPixels).toInt()
+
         val backCallback =
             requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, false) {
                 sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -92,6 +103,9 @@ class RecipeContainerFragment : Fragment() {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                binding.recipeBottomSheet.alpha = slideOffset
+                binding.recipesCarousel.alpha = 1f - slideOffset
+                binding.expandMoreButton.alpha = 1f - slideOffset
                 binding.titleApp.translationY = (-binding.titleApp.height * slideOffset)
             }
 
@@ -108,4 +122,14 @@ class RecipeContainerFragment : Fragment() {
         viewModel.retrieveRecipesByCategory(null)
     }
 
+    private fun getFloatDimension(@DimenRes id: Int): Float {
+        val outValue = TypedValue()
+        resources.getValue(id, outValue, true)
+        return outValue.float
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.recipesCarousel.unregisterOnPageChangeCallback(viewPagerChangeCallback)
+    }
 }

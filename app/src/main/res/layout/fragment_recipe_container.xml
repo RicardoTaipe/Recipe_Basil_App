@@ -21,9 +21,10 @@
                 android:id="@+id/title_app"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BASiL"
+                android:text="@string/basil"
                 android:textAlignment="center"
-                android:textSize="32sp"
+                android:textAppearance="@style/TextAppearance.Recipe.Headline2"
+                android:textColor="?attr/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,13 +40,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/scroll_down_button"
+                android:id="@+id/expand_more_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:scaleX="2"
+                android:scaleY="2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@android:drawable/arrow_down_float" />
+                app:srcCompat="@drawable/ic_expand_more"
+                tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Bottom sheet container. -->
@@ -54,6 +58,7 @@
             android:name="com.example.recipe_basil_app.ui.carousel.recipe.recipedetails.RecipeDetailsFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:alpha="0"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             tools:behavior_peekHeight="250dp"
             tools:layout="@layout/fragment_recipe_details" />
