@@ -2,4 +2,6 @@
     <string name="app_name">Recipe_Basil_App</string>
     <string name="shopping_list">SHOPPING LIST</string>
     <string name="menu_placeholder">APPETIZERS</string>
+    <string name="basil">BASiL</string>
+    <string name="recipe_name_placeholder">Creamy Pesto Pasta</string>
 </resources>
