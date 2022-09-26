@@ -13,6 +13,7 @@ import com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.RecipeD
 class DirectionsFragment : Fragment() {
     private lateinit var binding: FragmentDirectionsBinding
     private val viewModel: RecipeDetailsTabsViewModel by viewModels({ requireParentFragment() })
+    private val adapter = DirectionsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,9 +25,12 @@ class DirectionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.directionsList.adapter = adapter
+
         viewModel.recipe.observe(viewLifecycleOwner) {
             it?.let { recipe ->
-                binding.directionsText.text = recipe.getDirections().toString()
+                adapter.submitList(recipe.getDirections())
             }
         }
     }
