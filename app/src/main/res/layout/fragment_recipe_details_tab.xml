@@ -16,6 +16,8 @@
             android:layout_height="match_parent"
             app:behavior_draggable="false"
             app:behavior_peekHeight="48dp"
+            android:background="?attr/colorSurface"
+            android:alpha="0.95"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <com.google.android.material.tabs.TabLayout
@@ -25,7 +27,9 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tabMode="fixed" />
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabMode="fixed"
+                app:tabTextAppearance="@style/TextAppearance.Recipe.Button" />
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/pager"
