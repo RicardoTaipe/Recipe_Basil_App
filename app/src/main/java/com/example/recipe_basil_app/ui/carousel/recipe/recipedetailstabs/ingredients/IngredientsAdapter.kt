@@ -12,10 +12,6 @@ import com.example.recipe_basil_app.util.imageUrl
 class IngredientsAdapter :
     ListAdapter<IngredientModel, IngredientsAdapter.ViewHolder>(IngredientModelDiffCallback) {
 
-    interface IngredientsAdapterListener {
-        fun onMovieClicked(movie: IngredientModel)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = IngredientItemBinding.inflate(layoutInflater, parent, false)
@@ -28,10 +24,11 @@ class IngredientsAdapter :
 
     class ViewHolder(private val binding: IngredientItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(ingredientModel: IngredientModel) {
+
             binding.apply {
                 ingredient = ingredientModel
-                ingredientText.text = ingredientModel.name.padEnd(20, '.')
                 ingredientImage.imageUrl(ingredientModel.imageUrl)
                 executePendingBindings()
             }

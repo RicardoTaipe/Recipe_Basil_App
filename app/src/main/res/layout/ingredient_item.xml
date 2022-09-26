@@ -11,6 +11,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="28dp">
@@ -19,47 +20,58 @@
             android:id="@+id/add_image"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintWidth_default="percent"
-            app:layout_constraintWidth_percent="0.1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ingredient_text"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.1"
             app:srcCompat="@drawable/ic_add" />
 
-        <TextView
+        <com.example.recipe_basil_app.ui.customviews.TextViewDotted
             android:id="@+id/ingredient_text"
+            style="@style/TextAppearance.Recipe.Subtitle1"
             android:layout_width="0dp"
-            app:layout_constraintWidth_default="percent"
-            app:layout_constraintWidth_percent="0.6"
             android:layout_height="wrap_content"
-            tools:text="Basil"
+            android:maxLines="1"
+            android:text="@{ingredient.name}"
+            android:textColor="?attr/colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ingredient_measure"
             app:layout_constraintStart_toEndOf="@id/add_image"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.65"
+            tools:text="Basil" />
 
         <TextView
             android:id="@+id/ingredient_measure"
+            style="@style/TextAppearance.Recipe.Subtitle1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="6 tbsp"
+            android:paddingHorizontal="8dp"
             android:text="@{ingredient.measure}"
-            app:layout_constraintWidth_default="percent"
-            app:layout_constraintWidth_percent="0.3"
-            android:textAlignment="textEnd"
+            android:textAlignment="textStart"
+            android:textColor="?attr/colorPrimaryDark"
+            app:fontFamily="@font/lekton_regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ingredient_text"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.25"
+            tools:text="6 tbsp" />
+
         <ImageView
             android:id="@+id/ingredient_image"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
