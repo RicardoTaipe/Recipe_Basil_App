@@ -13,6 +13,7 @@
 
         <TextView
             android:id="@+id/subheadline"
+            style="@style/TextAppearance.Recipe.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
@@ -20,7 +21,6 @@
             android:paddingBottom="16dp"
             android:text="@string/shopping_list"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Recipe.Button"
             android:textColor="?attr/colorOnPrimary"
             app:drawableTopCompat="@drawable/ic_bookmark"
             app:layout_constraintEnd_toEndOf="parent"

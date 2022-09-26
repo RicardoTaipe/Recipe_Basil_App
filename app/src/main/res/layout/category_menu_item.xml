@@ -12,15 +12,16 @@
 
     <TextView
         android:id="@+id/meal_name"
+        style="@style/TextAppearance.Recipe.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
         android:paddingVertical="16dp"
         android:text="@{category.strCategory}"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.Recipe.Button"
         android:textColor="@color/text_color_state"
         tools:text="@string/menu_placeholder" />
 </layout>
