@@ -2,7 +2,6 @@ package com.example.recipe_basil_app.ui.carousel.container
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -72,7 +71,6 @@ class RecipeContainerFragment : Fragment() {
                 else -> // (1,+Infinity] This page is way off-screen to the right.
                     page.alpha = 1f
             }
-            Log.d("RecipeContainerFragment", "Po: $position")
         }
         viewPagerChangeCallback = object :
             OnPageChangeCallback() {

@@ -1,7 +1,6 @@
 package com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.ingredients
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +28,6 @@ class IngredientsFragment : Fragment() {
         binding.ingredientsList.adapter = adapter
         viewModel.recipe.observe(viewLifecycleOwner) {
             it?.let { recipe ->
-                val toString = recipe.getDirections()
-                Log.d("IngredientsFragment", toString.toString())
                 adapter.submitList(recipe.getIngredients())
             }
         }

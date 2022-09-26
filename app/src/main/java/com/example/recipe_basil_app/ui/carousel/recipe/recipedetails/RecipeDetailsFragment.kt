@@ -1,7 +1,6 @@
 package com.example.recipe_basil_app.ui.carousel.recipe.recipedetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,7 +31,6 @@ class RecipeDetailsFragment : Fragment() {
 
         viewModel.recipe.observe(viewLifecycleOwner) {
             it?.let { recipe ->
-                Log.d("RecipeDetailsFragment", recipe.toString())
                 (childFragmentManager.findFragmentById(R.id.tabs_bottom_sheet)
                         as? RecipeDetailsTabFragment)?.passRecipe(recipe)
             }
