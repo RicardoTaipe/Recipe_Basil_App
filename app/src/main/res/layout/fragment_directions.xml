@@ -15,7 +15,7 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/directions_list"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/pagerIndicator"
@@ -26,10 +26,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pagerIndicator"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/indicator_item"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/indicator_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
