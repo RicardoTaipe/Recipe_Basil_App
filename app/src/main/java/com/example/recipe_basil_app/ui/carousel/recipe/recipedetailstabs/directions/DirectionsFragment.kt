@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.recipe_basil_app.databinding.FragmentDirectionsBinding
 import com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.RecipeDetailsTabsViewModel
@@ -19,8 +19,7 @@ class DirectionsFragment : Fragment() {
     private val adapter = DirectionsAdapter(LAYOUT_DIRECTION)
     private val indicatorAdapter = DirectionsAdapter(LAYOUT_INDICATOR)
     private lateinit var callback: OnPageChangeCallback
-    private val snapHelper = LinearSnapHelper()
-
+    private val snapHelper = PagerSnapHelper()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
