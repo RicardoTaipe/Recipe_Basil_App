@@ -17,12 +17,10 @@ class DirectionsFragment : Fragment() {
     private lateinit var binding: FragmentDirectionsBinding
     private val viewModel: RecipeDetailsTabsViewModel by viewModels({ requireParentFragment() })
     private val adapter = DirectionsAdapter(LAYOUT_DIRECTION)
-    private val indicatorAdapter = DirectionsAdapter(LAYOUT_INDICATOR)
     private lateinit var callback: OnPageChangeCallback
-    private val snapHelper = PagerSnapHelper()
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentDirectionsBinding.inflate(inflater, container, false)
         return binding.root
@@ -33,7 +31,7 @@ class DirectionsFragment : Fragment() {
         viewModel.recipe.observe(viewLifecycleOwner) {
             it?.let { recipe ->
                 adapter.submitList(recipe.getDirections())
-                indicatorAdapter.submitList(recipe.getDirections())
+                binding.pagerIndicator.initWith(binding.directionsList)
             }
         }
 
@@ -46,27 +44,21 @@ class DirectionsFragment : Fragment() {
                 page.alpha = 1f - position
             }
         }
-        binding.pagerIndicator.adapter = indicatorAdapter
-        callback = object :
-            OnPageChangeCallback() {
+
+        callback = object : OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                indicatorAdapter.selectedPos = position
-                indicatorAdapter.notifyDataSetChanged()
-                binding.pagerIndicator.smoothScrollToPosition(position)
+
+                binding.pagerIndicator.moveTo(position)
             }
         }
 
         binding.directionsList.registerOnPageChangeCallback(callback)
-        snapHelper.attachToRecyclerView(binding.pagerIndicator)
 
-
-        indicatorAdapter.listener = { position, _ ->
-            indicatorAdapter.selectedPos = position
-            indicatorAdapter.notifyDataSetChanged()
-            binding.directionsList.setCurrentItem(position, true)
+        binding.pagerIndicator.indicatorClickListener = {
+            binding.pagerIndicator.moveTo(it)
+            binding.directionsList.setCurrentItem(it, true)
         }
-
     }
 
     override fun onDestroy() {
