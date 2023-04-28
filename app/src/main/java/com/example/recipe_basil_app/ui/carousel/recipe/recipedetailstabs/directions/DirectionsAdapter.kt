@@ -21,12 +21,11 @@ class DirectionsAdapter(private val viewType: Int) :
     var listener: ((Int, View) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
         return if (viewType == LAYOUT_DIRECTION) {
-            val layoutInflater = LayoutInflater.from(parent.context)
             val binding = DirectionItemBinding.inflate(layoutInflater, parent, false)
             ViewHolderDirection(binding)
         } else {
-            val layoutInflater = LayoutInflater.from(parent.context)
             val binding = IndicatorItemBinding.inflate(layoutInflater, parent, false)
             ViewHolderIndicator(binding)
         }
@@ -60,7 +59,11 @@ class DirectionsAdapter(private val viewType: Int) :
     class ViewHolderIndicator(private val binding: IndicatorItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(directionModel: DirectionModel, listener: ((Int, View) -> Unit)?, selectedPos: Int) {
+        fun bind(
+            directionModel: DirectionModel,
+            listener: ((Int, View) -> Unit)?,
+            selectedPos: Int
+        ) {
             val isSelected = selectedPos == adapterPosition
             binding.apply {
                 root.setOnClickListener {

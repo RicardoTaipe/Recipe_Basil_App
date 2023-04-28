@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.example.recipe_basil_app.R
 import com.example.recipe_basil_app.databinding.FragmentDirectionsBinding
 import com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.RecipeDetailsTabsViewModel
 
@@ -47,11 +49,16 @@ class DirectionsFragment : Fragment() {
             }
         }
         binding.pagerIndicator.adapter = indicatorAdapter
+        val circleItemDecoration =
+            CircleItemDecoration(ContextCompat.getColor(requireContext(), R.color.green_cyan))
+        binding.pagerIndicator.addItemDecoration(circleItemDecoration)
         callback = object :
             OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 indicatorAdapter.selectedPos = position
+                circleItemDecoration.setSelectedPosition(position)
+                binding.pagerIndicator.invalidateItemDecorations()
                 indicatorAdapter.notifyDataSetChanged()
                 binding.pagerIndicator.smoothScrollToPosition(position)
             }
