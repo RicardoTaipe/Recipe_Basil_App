@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
     private val categoryAdapter = MenuAdapter()
     private val pagerAdapter: RecipeCarouselAdapter = RecipeCarouselAdapter()
     private lateinit var viewPagerChangeCallback: OnPageChangeCallback
-    private lateinit var sheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var sheetBehavior: BottomSheetBehavior<MotionLayout>
 
     private val viewModel: HomeViewModel by viewModels()
 
