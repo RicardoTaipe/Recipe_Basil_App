@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_home_scene">
+
+        <TextView
+            android:id="@+id/title_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/basil"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Recipe.Headline2"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--        <androidx.fragment.app.FragmentContainerView-->
+        <!--            android:id="@+id/fragment_menu"-->
+        <!--            android:name="com.example.recipe_basil_app.ui.menudrawer.MenuFragment"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:elevation="10dp"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            tools:layout="@layout/fragment_menu" />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_menu"
+            android:layout_width="0dp"
+            tools:visibility="gone"
+            android:layout_height="0dp">
+
+            <TextView
+                android:id="@+id/subheadline"
+                style="@style/TextAppearance.Recipe.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:drawablePadding="16dp"
+                android:paddingBottom="16dp"
+                android:text="@string/shopping_list"
+                android:textAlignment="center"
+                android:textColor="?attr/colorOnPrimary"
+                app:drawableTopCompat="@drawable/ic_bookmark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="?attr/colorPrimaryDark"
+                app:layout_constraintBottom_toTopOf="@id/categories_recyclerview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/categories_recyclerview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/subheadline"
+                tools:itemCount="4"
+                tools:listitem="@layout/category_menu_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--        <androidx.fragment.app.FragmentContainerView-->
+        <!--            android:id="@+id/fragment_carousel"-->
+        <!--            android:name="com.example.recipe_basil_app.ui.carousel.container.RecipeContainerFragment"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:background="@color/red_orange"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            tools:layout="@layout/fragment_recipe_container" />-->
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/fragment_carousel"
+            android:layout_width="0dp"
+            android:layout_height="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container"
+                tools:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineTop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="@dimen/carousel_top_spacing" />
+
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/recipes_carousel"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/guidelineTop" />
+
+
+                <ImageView
+                    android:id="@+id/expand_more_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="3"
+                    android:scaleY="2"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_expand_more"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Bottom sheet container. -->
+<!--            style="@style/Widget.Material3.BottomSheet"-->
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/recipe_bottom_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="32dp"
+                android:visibility="visible"
+                style="@style/Widget.Material3.BottomSheet"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                tools:behavior_peekHeight="@dimen/peek_height"
+                app:layoutDescription="@xml/fragment_new_home_scene">
+
+                <View
+                    android:id="@+id/recipe_background"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/carousel_image_height"
+                    android:background="@color/honeydew"
+                    android:scaleType="centerCrop"
+
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="@dimen/carousel_top_spacing" />
+
+                <TextView
+                    android:id="@+id/recipe_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/title_padding"
+                    android:ellipsize="end"
+                    android:maxLines="@integer/max_lines"
+                    android:text="Beef and Mustard Pie"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.Recipe.Headline3"
+                    android:textColor="?attr/colorOnTertiary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+            <!-- End Bottom sheet container. -->
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+</layout>

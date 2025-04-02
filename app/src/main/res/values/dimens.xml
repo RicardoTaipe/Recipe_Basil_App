@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="item_space">16dp</dimen>
-    <item name="bottom_sheet_ref" format="float" type="dimen">0.65</item>
+    <dimen name="top_reference">110dp</dimen>
+    <dimen name="peek_height">250dp</dimen>
+    <dimen name="carousel_top_spacing">130dp</dimen>
+    <dimen name="carousel_image_height">300dp</dimen>
+    <dimen name="title_padding">32dp</dimen>
+    <dimen name="title_translation">32dp</dimen>
+    <item name="carousel_top_reference" format="float" type="dimen">0.15</item>
+    <item name="bottom_sheet_ref" format="float" type="dimen">0.15</item>
+    <item name="bottom_reference" format="float" type="dimen">0.6363</item>
+    <item name="peek_height_reference" format="float" type="dimen">0.6363</item>
 </resources>

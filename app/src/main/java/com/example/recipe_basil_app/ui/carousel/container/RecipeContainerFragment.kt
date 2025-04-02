@@ -96,8 +96,8 @@ class RecipeContainerFragment : Fragment() {
         sheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 backCallback.isEnabled = newState == BottomSheetBehavior.STATE_EXPANDED
-                requireActivity().findViewById<ViewPager2>(R.id.landing_pager)
-                    .isUserInputEnabled = newState != BottomSheetBehavior.STATE_EXPANDED
+//                requireActivity().findViewById<ViewPager2>(R.id.landing_pager)
+//                    .isUserInputEnabled = newState != BottomSheetBehavior.STATE_EXPANDED
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
