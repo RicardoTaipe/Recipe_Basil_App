@@ -15,8 +15,15 @@ class HomeViewModel : ViewModel() {
     private val _categories = MutableLiveData<List<Category>?>()
     val categories: LiveData<List<Category>?> = _categories
 
-    private val _mealByCategory = MutableLiveData<List<Meal>?>()
-    val mealByCategory: LiveData<List<Meal>?> = _mealByCategory
+    private val _selectedCategory = MutableLiveData<Category>()
+    val selectedCategory: LiveData<Category> = _selectedCategory
+
+    private fun selectCategory(category: Category) {
+        _selectedCategory.value = category
+    }
+
+    private val _recipeByCategory = MutableLiveData<List<Meal>?>()
+    val recipeByCategory: LiveData<List<Meal>?> = _recipeByCategory
 
     private val _recipe = MutableLiveData<Recipe>()
     val recipe: LiveData<Recipe> = _recipe
@@ -38,7 +45,7 @@ class HomeViewModel : ViewModel() {
             try {
                 val response = RecipeApiService.recipeApi.filterByCategory(item ?: "Beef")
                 val meals= response.meals.orEmpty()
-                _mealByCategory.value = meals.take(minOf(meals.size, 5))
+                _recipeByCategory.value = meals.take(minOf(meals.size, 5))
             } catch (t: Throwable) {
                 Log.d("RecipeContainerVModel", t.toString())
             }
@@ -46,7 +53,7 @@ class HomeViewModel : ViewModel() {
     }
 
     fun itemSelected(position: Int) {
-        val id = _mealByCategory.value?.get(position)?.idMeal ?: return
+        val id = _recipeByCategory.value?.get(position)?.idMeal ?: return
         viewModelScope.launch {
             try {
                 val recipe = RecipeApiService.recipeApi.getRecipeById(id)

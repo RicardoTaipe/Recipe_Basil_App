@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/recipe_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="32dp"
+        android:visibility="visible"
+        app:behavior_hideable="false"
+        style="@style/Widget.Material3.BottomSheet"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        tools:behavior_peekHeight="@dimen/peek_height"
+        app:layoutDescription="@xml/fragment_new_home_scene"
+        tools:showIn="@layout/fragment_new_home">
+
+        <View
+            android:id="@+id/recipe_background"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/carousel_image_height"
+            android:background="@color/honeydew"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/carousel_top_spacing" />
+
+        <TextView
+            android:id="@+id/recipe_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/title_padding"
+            android:ellipsize="end"
+            android:maxLines="@integer/max_lines"
+            android:text="Beef and Mustard Pie"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Recipe.Headline3"
+            android:textColor="?attr/colorOnTertiary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

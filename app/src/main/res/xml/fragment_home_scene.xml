@@ -7,7 +7,7 @@
         app:duration="500">
         <OnSwipe
             app:dragDirection="dragDown"
-            app:touchAnchorId="@+id/fragment_menu"
+            app:touchAnchorId="@+id/menu_drawer"
             app:touchAnchorSide="bottom" />
     </Transition>
     <ConstraintSet android:id="@+id/start">
@@ -25,7 +25,7 @@
             />
 
         <Constraint
-            android:id="@+id/fragment_menu"
+            android:id="@+id/menu_drawer"
             android:visibility="gone"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Constraint
-            android:id="@id/fragment_menu"
+            android:id="@id/menu_drawer"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

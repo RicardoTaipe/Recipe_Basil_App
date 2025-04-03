@@ -1,6 +1,5 @@
 package com.example.recipe_basil_app.ui.home
 
-import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -27,8 +25,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentNewHomeBinding
-    private val categoryAdapter = MenuAdapter()
-    private val pagerAdapter: RecipeCarouselAdapter = RecipeCarouselAdapter()
+    private val categoryAdapter by lazy { MenuAdapter() }
+    private val pagerAdapter by lazy { RecipeCarouselAdapter() }
     private lateinit var viewPagerChangeCallback: OnPageChangeCallback
     private lateinit var sheetBehavior: BottomSheetBehavior<MotionLayout>
 
@@ -42,55 +40,75 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.categoriesRecyclerview.adapter = categoryAdapter
 
-        viewModel.categories.observe(viewLifecycleOwner) {
-            categoryAdapter.submitList(it)
+        //setUpMenuDrawer()
+
+        setUpCarousel()
+
+        setUpRecipeDetailsContainer()
+
+        setUpRecipeTabs()
+
+        viewModel.retrieveRecipesByCategory(null)
+    }
+
+//    private fun setUpMenuDrawer() {
+//        binding.menuDrawer.categoriesRecyclerview.adapter = categoryAdapter
+//
+//        categoryAdapter.itemClickListener = { category, position ->
+//            categoryAdapter.selectedPos = position
+//            categoryAdapter.notifyDataSetChanged()
+//            //setFragmentResult(REQUEST_CATEGORY, bundleOf(CATEGORY_SELECTED to category.strCategory))
+//        }
+//        viewModel.categories.observe(viewLifecycleOwner) {
+//            categoryAdapter.submitList(it)
+//        }
+//    }
+
+    private fun setUpCarousel() {
+        binding.carouselContainer.recipesCarousel.adapter = pagerAdapter
+
+        viewModel.recipeByCategory.observe(viewLifecycleOwner) { recipes ->
+            recipes?.let {
+                pagerAdapter.submitList(it)
+            }
         }
 
-        categoryAdapter.itemClickListener = { category, position ->
-            categoryAdapter.selectedPos = position
-            categoryAdapter.notifyDataSetChanged()
-            //setFragmentResult(REQUEST_CATEGORY, bundleOf(CATEGORY_SELECTED to category.strCategory))
-        }
-
-        //CAROUSEL
         viewPagerChangeCallback = object :
             OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 viewModel.itemSelected(position)
             }
         }
-        binding.recipesCarousel.adapter = pagerAdapter
-        applyParallaxAnimation()
 
-        viewModel.mealByCategory.observe(viewLifecycleOwner) { recipes ->
-            recipes?.let {
-                pagerAdapter.submitList(it)
-            }
-        }
+        applyParallaxAnimation()
+    }
+
+    private fun setUpRecipeDetailsContainer() {
         setPeekHeight()
         animateWhenBottomSheetIsDragged()
-        viewModel.retrieveRecipesByCategory(null)
+    }
+
+    private fun setUpRecipeTabs() {
+
     }
 
     private fun animateWhenBottomSheetIsDragged() {
         sheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 //backCallback.isEnabled = newState == BottomSheetBehavior.STATE_EXPANDED
-                binding.recipesCarousel.isUserInputEnabled = newState != BottomSheetBehavior.STATE_EXPANDED
+                binding.carouselContainer.recipesCarousel.isUserInputEnabled = newState != BottomSheetBehavior.STATE_EXPANDED
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 Log.d("offset", slideOffset.toString())
                 //binding.recipeBottomSheet.alpha = slideOffset
-                binding.recipeBottomSheet.progress = slideOffset
+                binding.recipeDetailsContainer.recipeBottomSheet.progress = slideOffset
                 //binding.recipesCarousel.alpha = 1f - slideOffset
                 //binding.recipeTitle.alpha = 1f * slideOffset
-                binding.expandMoreButton.alpha = 1f - slideOffset
+                //binding.carouselContainer.alpha = 1f - slideOffset
                 binding.titleApp.translationY = (binding.titleApp.height/2) * -slideOffset
             }
 
@@ -98,8 +116,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setPeekHeight() {
-        sheetBehavior = BottomSheetBehavior.from(binding.recipeBottomSheet)
-        sheetBehavior.isHideable = false
+        sheetBehavior = BottomSheetBehavior.from(binding.recipeDetailsContainer.recipeBottomSheet)
         val carouselImageHeight = requireContext().dimenToPx(R.dimen.carousel_image_height)
         val carouselTopSpacing = requireContext().dimenToPx(R.dimen.carousel_top_spacing)
         sheetBehavior.peekHeight =
@@ -115,7 +132,7 @@ class HomeFragment : Fragment() {
     private fun applyParallaxAnimation() {
         lateinit var nameRecipe: TextView
         lateinit var imageRecipe: ImageView
-        binding.recipesCarousel.setPageTransformer { page, position ->
+        binding.carouselContainer.recipesCarousel.setPageTransformer { page, position ->
             nameRecipe = page.findViewById(R.id.meal_name)
             imageRecipe = page.findViewById(R.id.meal_image)
             when {
@@ -135,7 +152,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.recipesCarousel.unregisterOnPageChangeCallback(viewPagerChangeCallback)
+        binding.carouselContainer.recipesCarousel.unregisterOnPageChangeCallback(viewPagerChangeCallback)
     }
 
     private fun modifyConstraintSets(motionLayout: MotionLayout) {
@@ -147,28 +164,28 @@ class HomeFragment : Fragment() {
 
 
         startConstraintSet?.apply {
-            setVisibility(R.id.fragment_menu, ConstraintSet.VISIBLE)
+            setVisibility(R.id.menu_drawer, ConstraintSet.VISIBLE)
             connect(
-                R.id.fragment_menu,
+                R.id.menu_drawer,
                 ConstraintSet.BOTTOM,
                 ConstraintSet.PARENT_ID,
                 ConstraintSet.TOP
             )
             connect(
-                R.id.fragment_menu,
+                R.id.menu_drawer,
                 ConstraintSet.START,
                 ConstraintSet.PARENT_ID,
                 ConstraintSet.START
             )
             connect(
-                R.id.fragment_menu,
+                R.id.menu_drawer,
                 ConstraintSet.END,
                 ConstraintSet.PARENT_ID,
                 ConstraintSet.END
             )
-            constrainHeight(R.id.fragment_menu, screenHeight)
+            constrainHeight(R.id.menu_drawer, screenHeight)
 
-            setVisibility(R.id.fragment_carousel, ConstraintSet.VISIBLE)
+            setVisibility(R.id.carousel_container, ConstraintSet.VISIBLE)
             connect(
                 R.id.fragment_carousel,
                 ConstraintSet.TOP,
@@ -197,32 +214,32 @@ class HomeFragment : Fragment() {
         }
 
         endConstraintSet?.apply {
-            setVisibility(R.id.fragment_menu, ConstraintSet.VISIBLE)
+            setVisibility(R.id.menu_drawer, ConstraintSet.VISIBLE)
             connect(
-                R.id.fragment_menu,
+                R.id.menu_drawer,
                 ConstraintSet.TOP,
                 ConstraintSet.PARENT_ID,
                 ConstraintSet.TOP
             )
             connect(
-                R.id.fragment_menu,
+                R.id.menu_drawer,
                 ConstraintSet.START,
                 ConstraintSet.PARENT_ID,
                 ConstraintSet.START
             )
             connect(
-                R.id.fragment_menu,
+                R.id.menu_drawer,
                 ConstraintSet.END,
                 ConstraintSet.PARENT_ID,
                 ConstraintSet.END
             )
             connect(
-                R.id.fragment_menu,
+                R.id.menu_drawer,
                 ConstraintSet.BOTTOM,
                 ConstraintSet.PARENT_ID,
                 ConstraintSet.BOTTOM
             )
-            constrainHeight(R.id.fragment_menu, screenHeight)
+            constrainHeight(R.id.menu_drawer, screenHeight)
 
             setVisibility(R.id.fragment_carousel, ConstraintSet.VISIBLE)
             connect(
