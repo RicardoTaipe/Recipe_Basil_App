@@ -13,48 +13,57 @@
             android:id="@+id/title_app"
             layout="@layout/home_top" />
 
-<!--        <androidx.fragment.app.FragmentContainerView-->
-<!--            android:id="@+id/menu_drawer"-->
-<!--            android:name="com.example.recipe_basil_app.ui.menudrawer.MenuFragment"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            tools:layout="@layout/fragment_menu" />-->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/menu_drawer"
+            android:name="com.example.recipe_basil_app.ui.menudrawer.MenuFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:layout="@layout/fragment_menu" />
 
-                <include
-                    android:id="@+id/menu_drawer"
-                    layout="@layout/menu_drawer" />
-
-        <!--        <androidx.fragment.app.FragmentContainerView-->
-        <!--            android:id="@+id/fragment_carousel"-->
-        <!--            android:name="com.example.recipe_basil_app.ui.carousel.container.RecipeContainerFragment"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:background="@color/red_orange"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            tools:layout="@layout/fragment_recipe_container" />-->
+<!--                <include-->
+<!--                    android:id="@+id/menu_drawer"-->
+<!--                    layout="@layout/menu_drawer" />-->
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/fragment_carousel"
             android:layout_width="0dp"
             android:layout_height="0dp">
 
-            <include
-                android:id="@+id/carousel_container"
-                layout="@layout/recipe_carousel" />
+<!--            <include-->
+<!--                android:id="@+id/carousel_container"-->
+<!--                layout="@layout/recipe_carousel" />-->
 
-            <!-- Recipe Details Bottom sheet container. -->
-            <!--            style="@style/Widget.Material3.BottomSheet"-->
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/carousel_container"
+                android:name="com.example.recipe_basil_app.ui.carousel.container.RecipeContainerFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible">
+                tools:layout="@layout/fragment_recipe_container" />
 
-                <include
-                    android:id="@+id/recipe_details_container"
-                    layout="@layout/recipe_details_bottom_sheet" />
+            <!-- Recipe Details Bottom sheet container. -->
+<!--            <include-->
+<!--                android:id="@+id/recipe_details_container"-->
+<!--                layout="@layout/new_fragment_recipe_details" />-->
 
-                <include layout="@layout/recipe_tabs" />
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/recipe_details_container"
+                android:name="com.example.recipe_basil_app.ui.carousel.recipe.recipedetails.RecipeDetailsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/new_fragment_recipe_details" />
 
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+<!--            <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:visibility="visible">-->
+
+<!--                <include-->
+<!--                    android:id="@+id/recipe_details_container"-->
+<!--                    layout="@layout/recipe_details_content" />-->
+
+<!--                <include layout="@layout/recipe_tabs" />-->
+
+<!--            </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
             <!-- End Bottom sheet container. -->
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.motion.widget.MotionLayout>

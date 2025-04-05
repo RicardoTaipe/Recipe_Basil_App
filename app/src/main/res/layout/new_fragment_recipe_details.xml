@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.recipe_basil_app.ui.home.HomeViewModel" />
+    </data>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <include
+            android:id="@+id/recipe_details_content"
+            layout="@layout/recipe_details_content"
+            app:recipe="@{viewModel.recipe}"/>
+
+<!--        <include layout="@layout/recipe_tabs" />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/recipe_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:behavior_draggable="false"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="48dp"
+            android:background="?attr/colorSurface"
+            android:alpha="0.95"
+            style="@style/Widget.Material3.BottomSheet"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            tools:showIn="@layout/fragment_new_home">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabMode="fixed"
+                app:tabTextAppearance="@style/TextAppearance.Recipe.Button">
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/pager"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

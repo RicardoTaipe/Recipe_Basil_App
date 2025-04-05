@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.recipe_basil_app.R
 import com.example.recipe_basil_app.databinding.FragmentDirectionsBinding
-import com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.RecipeDetailsTabsViewModel
+import com.example.recipe_basil_app.ui.home.HomeViewModel
 
 
 class DirectionsFragment : Fragment() {
     private lateinit var binding: FragmentDirectionsBinding
-    private val viewModel: RecipeDetailsTabsViewModel by viewModels({ requireParentFragment() })
+    private val viewModel: HomeViewModel by viewModels({ requireParentFragment() })
     private val adapter = DirectionsAdapter(LAYOUT_DIRECTION)
     private val indicatorAdapter = DirectionsAdapter(LAYOUT_INDICATOR)
     private lateinit var callback: OnPageChangeCallback

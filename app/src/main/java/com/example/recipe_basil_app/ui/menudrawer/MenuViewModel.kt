@@ -10,18 +10,18 @@ import com.example.recipe_basil_app.network.response.Category
 import kotlinx.coroutines.launch
 
 class MenuViewModel : ViewModel() {
-    private val _allCategories = MutableLiveData<List<Category>?>()
-    val allCategories: LiveData<List<Category>?> = _allCategories
-
-
-    init {
-        viewModelScope.launch {
-            try {
-                val allCategories = RecipeApiService.recipeApi.getAllCategories()
-                _allCategories.value = allCategories.meals
-            } catch (t: Throwable) {
-                Log.d("MenuViewModel", t.toString())
-            }
-        }
-    }
+//    private val _categories = MutableLiveData<List<Category>?>()
+//    val categories: LiveData<List<Category>?> = _categories
+//
+//    init {
+//        viewModelScope.launch {
+//            try {
+//                val response = RecipeApiService.recipeApi.getAllCategories()
+//                val meals = response.meals.orEmpty()
+//                _categories.value = meals.take(minOf(meals.size, 4))
+//            } catch (t: Throwable) {
+//                Log.d("MenuViewModel", t.toString())
+//            }
+//        }
+//    }
 }

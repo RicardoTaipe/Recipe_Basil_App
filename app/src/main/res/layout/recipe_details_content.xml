@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="recipe"
+            type="com.example.recipe_basil_app.network.response.Recipe" />
 
     </data>
 
@@ -43,7 +46,8 @@
             android:paddingTop="@dimen/title_padding"
             android:ellipsize="end"
             android:maxLines="@integer/max_lines"
-            android:text="Beef and Mustard Pie"
+            android:text="@{recipe.strMeal}"
+            tools:text="Beef and Mustard Pie"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.Recipe.Headline3"
             android:textColor="?attr/colorOnTertiary"

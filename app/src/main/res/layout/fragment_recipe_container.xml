@@ -7,61 +7,42 @@
 
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        tools:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:showIn="@layout/fragment_new_home">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.carousel.container.RecipeContainerFragment">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/carousel_top_spacing" />
 
-            <TextView
-                android:id="@+id/title_app"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/basil"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.Recipe.Headline2"
-                android:textColor="?attr/colorPrimary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/recipes_carousel"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guidelineTop" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/recipes_carousel"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/expand_more_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleX="3"
+            android:scaleY="2"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_expand_more"
+            tools:ignore="ContentDescription" />
 
-            <ImageView
-                android:id="@+id/expand_more_button"
-                android:layout_width="wrap_content"
-                android:scaleY="2"
-                android:scaleX="3"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_expand_more"
-                tools:ignore="ContentDescription" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- Bottom sheet container. -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/recipe_bottom_sheet"
-            android:name="com.example.recipe_basil_app.ui.carousel.recipe.recipedetails.RecipeDetailsFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-            tools:behavior_peekHeight="250dp"
-            tools:layout="@layout/fragment_recipe_details" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
