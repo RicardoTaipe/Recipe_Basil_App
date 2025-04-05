@@ -112,27 +112,41 @@ data class Recipe(
     val strYoutube: String? = null
 ) {
     fun getIngredients(): List<IngredientModel> {
-        val regexIngredient = """strIngredient(\d+)=(\w.*?[^,]*)""".toRegex()
-        val regexMeasure = """strMeasure(\d+)=(\w.*?[^,]*)""".toRegex()
-        val text = this.toString()
-        val ingredients =
-            regexIngredient.findAll(text).map { it.groupValues[1] to it.groupValues[2] }.toList()
-        val measures =
-            regexMeasure.findAll(text).map { it.groupValues[1] to it.groupValues[2] }.toList()
-        return ingredients.map { i ->
-            val measure = measures.find { m -> m.first == i.first }
-            val imageUrl = "${IMAGE_BASE_URL}${i.second}.png"
-            IngredientModel(i.second, measure?.second ?: "", imageUrl)
+        val ingredients = listOf(
+            strIngredient1 to strMeasure1,
+            strIngredient2 to strMeasure2,
+            strIngredient3 to strMeasure3,
+            strIngredient4 to strMeasure4,
+            strIngredient5 to strMeasure5,
+            strIngredient6 to strMeasure6,
+            strIngredient7 to strMeasure7,
+            strIngredient8 to strMeasure8,
+            strIngredient9 to strMeasure9,
+            strIngredient10 to strMeasure10,
+            strIngredient11 to strMeasure11,
+            strIngredient12 to strMeasure12,
+            strIngredient13 to strMeasure13,
+            strIngredient14 to strMeasure14,
+            strIngredient15 to strMeasure15,
+            strIngredient16 to strMeasure16,
+            strIngredient17 to strMeasure17,
+            strIngredient18 to strMeasure18,
+            strIngredient19 to strMeasure19,
+            strIngredient20 to strMeasure20
+        )
+        return ingredients.filter { !it.first.isNullOrBlank() }.map { (name, measure) ->
+            val trimmedName = name?.trim().orEmpty()
+            val imageUrl = "${IMAGE_BASE_URL}${trimmedName}.png"
+            IngredientModel(trimmedName, measure?.trim().orEmpty(), imageUrl)
         }
-
     }
 
     fun getDirections(): List<DirectionModel> {
-        val regex = """.*?\.""".toRegex()
-        val text = this.strInstructions
-        val directions = regex.findAll(text.toString())
-            .map { it.value.trim().replace("\\r\\n", "") }.toList()
-        return directions.mapIndexed { index, s -> DirectionModel(index, s) }
+        return strInstructions?.split(Regex("""(?<=[.?!])\s*"""))
+            ?.filter { it.isNotBlank() }
+            ?.chunked(2)
+            ?.mapIndexed { index, s -> DirectionModel(index, s.joinToString()) }
+            ?: emptyList()
     }
 }
 

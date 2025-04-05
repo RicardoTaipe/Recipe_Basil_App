@@ -62,11 +62,11 @@ class RecipeDetailsFragment : Fragment() {
 
                         binding.recipeDetailsContent.recipeBottomSheet.alpha =
                             if (newState == STATE_COLLAPSED) 0f else 1f
-                        binding.recipeTabs.alpha = if (newState == STATE_COLLAPSED) 0f else 0.95f
+                        //binding.recipeTabs.alpha = if (newState == STATE_COLLAPSED) 0f else 0.95f
                     }
 
                     override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                        //binding.recipeBottomSheet.alpha = slideOffset
+                        binding.recipeTabs.alpha = slideOffset
                         binding.recipeDetailsContent.recipeBottomSheet.progress = slideOffset
                         //binding.recipesCarousel.alpha = 1f - slideOffset
                         //binding.recipeTitle.alpha = 1f * slideOffset
@@ -87,7 +87,13 @@ class RecipeDetailsFragment : Fragment() {
                     tabsSheetBehavior.isDraggable = newState == STATE_EXPANDED
                 }
 
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                    val scale = 1 - (0.2f * slideOffset)  // Scale from 1 to 0.8
+                    binding.recipeDetailsContent.recipeBottomSheet.apply {
+                        scaleX = scale
+                        scaleY = scale
+                    }
+                }
             })
         }
     }

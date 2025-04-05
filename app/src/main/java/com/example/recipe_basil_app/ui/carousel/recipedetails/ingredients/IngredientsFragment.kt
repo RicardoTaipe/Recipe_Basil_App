@@ -1,7 +1,6 @@
 package com.example.recipe_basil_app.ui.carousel.recipedetails.ingredients
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

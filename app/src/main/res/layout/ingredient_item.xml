@@ -14,6 +14,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         android:padding="24dp">
 
         <ImageView
@@ -22,6 +23,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ingredient_text"
+            app:layout_constraintVertical_bias="0"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,6 +35,7 @@
             style="@style/TextAppearance.Recipe.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintVertical_bias="0"
             android:maxLines="1"
             android:paddingHorizontal="8dp"
             android:text="@{ingredient.name}"
@@ -57,6 +60,7 @@
             android:id="@+id/ingredient_measure"
             style="@style/TextAppearance.Recipe.Subtitle1"
             android:layout_width="60dp"
+            app:layout_constraintVertical_bias="0"
             android:layout_height="wrap_content"
             android:text="@{ingredient.measure}"
             android:textAlignment="center"
@@ -66,16 +70,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="6 tbsp" />
-
-        <ImageView
-            android:id="@+id/ingredient_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

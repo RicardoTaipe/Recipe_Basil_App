@@ -48,6 +48,9 @@ class RecipeContainerFragment : Fragment() {
             }
         }
         binding.recipesCarousel.registerOnPageChangeCallback(viewPagerChangeCallback)
+        viewModel.slideOffset.observe(viewLifecycleOwner){
+            binding.expandMoreButton.alpha
+        }
     }
 
     private fun observeViewModel() {
