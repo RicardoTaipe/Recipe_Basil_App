@@ -1,4 +1,4 @@
-package com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.ingredients
+package com.example.recipe_basil_app.ui.carousel.recipedetails.ingredients
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

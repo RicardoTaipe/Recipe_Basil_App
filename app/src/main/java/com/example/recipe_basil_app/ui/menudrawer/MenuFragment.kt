@@ -5,24 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.recipe_basil_app.databinding.FragmentMenuBinding
 import com.example.recipe_basil_app.ui.home.HomeViewModel
-
-const val CATEGORY_SELECTED = "category_selected"
-const val REQUEST_CATEGORY = "request_category"
 
 class MenuFragment : Fragment() {
     private lateinit var binding: FragmentMenuBinding
     private val categoryAdapter by lazy { MenuAdapter() }
 
-    private val viewModel: HomeViewModel by viewModels({ requireParentFragment() })
+    private val viewModel: HomeViewModel by activityViewModels{ HomeViewModel.Factory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentMenuBinding.inflate(inflater, container, false)
         return binding.root
     }

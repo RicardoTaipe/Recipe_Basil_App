@@ -1,4 +1,4 @@
-package com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.ingredients
+package com.example.recipe_basil_app.ui.carousel.recipedetails.ingredients
 
 import android.os.Bundle
 import android.util.Log
@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.recipe_basil_app.databinding.FragmentIngredientsBinding
 import com.example.recipe_basil_app.ui.home.HomeViewModel
 
 
 class IngredientsFragment : Fragment() {
     private lateinit var binding: FragmentIngredientsBinding
-    private val viewModel: HomeViewModel by viewModels({ requireParentFragment() })
-    private val adapter = IngredientsAdapter()
+    private val viewModel: HomeViewModel by activityViewModels { HomeViewModel.Factory }
+    private val adapter by lazy { IngredientsAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,11 +28,7 @@ class IngredientsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.ingredientsList.adapter = adapter
         viewModel.recipe.observe(viewLifecycleOwner) {
-            it?.let { recipe ->
-                Log.d("Ingredients fragment", recipe.toString())
-                adapter.submitList(recipe.getIngredients())
-            }
+            adapter.submitList(it.getIngredients())
         }
     }
-
 }

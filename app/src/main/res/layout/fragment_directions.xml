@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toStartOf="@id/pagerIndicator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:context=".ui.carousel.recipe.recipedetailstabs.directions.DirectionsFragment" />
+            tools:context=".ui.carousel.recipedetails.directions.DirectionsFragment" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/pagerIndicator"

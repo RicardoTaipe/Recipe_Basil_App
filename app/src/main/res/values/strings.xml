@@ -4,4 +4,6 @@
     <string name="menu_placeholder">APPETIZERS</string>
     <string name="basil">BASiL</string>
     <string name="recipe_name_placeholder">Creamy Pesto Pasta</string>
+    <string name="ingredients">INGREDIENTS</string>
+    <string name="directions">DIRECTIONS</string>
 </resources>

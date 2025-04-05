@@ -1,4 +1,4 @@
-package com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.directions
+package com.example.recipe_basil_app.ui.carousel.recipedetails.directions
 
 import android.graphics.Canvas
 import android.graphics.Color

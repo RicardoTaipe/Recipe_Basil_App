@@ -1,4 +1,4 @@
-package com.example.recipe_basil_app.ui.carousel.recipe.recipedetailstabs.directions
+package com.example.recipe_basil_app.ui.carousel.recipedetails.directions
 
 
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.recipe_basil_app.R
@@ -17,11 +17,12 @@ import com.example.recipe_basil_app.ui.home.HomeViewModel
 
 class DirectionsFragment : Fragment() {
     private lateinit var binding: FragmentDirectionsBinding
-    private val viewModel: HomeViewModel by viewModels({ requireParentFragment() })
-    private val adapter = DirectionsAdapter(LAYOUT_DIRECTION)
-    private val indicatorAdapter = DirectionsAdapter(LAYOUT_INDICATOR)
+    private val viewModel: HomeViewModel by activityViewModels { HomeViewModel.Factory }
+    private val adapter by lazy { DirectionsAdapter(LAYOUT_DIRECTION) }
+    private val indicatorAdapter by lazy { DirectionsAdapter(LAYOUT_INDICATOR) }
     private lateinit var callback: OnPageChangeCallback
     private val snapHelper = PagerSnapHelper()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,11 +33,11 @@ class DirectionsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel.recipe.observe(viewLifecycleOwner) {
-            it?.let { recipe ->
-                adapter.submitList(recipe.getDirections())
-                indicatorAdapter.submitList(recipe.getDirections())
-            }
+            adapter.submitList(it.getDirections())
+            indicatorAdapter.submitList(it.getDirections())
+
         }
 
         binding.directionsList.adapter = adapter
