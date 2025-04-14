@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recipe_basil_app.databinding.DirectionItemBinding
 import com.example.recipe_basil_app.databinding.IndicatorItemBinding
 import com.example.recipe_basil_app.network.response.DirectionModel
+import java.util.Locale
 
 const val LAYOUT_DIRECTION = 0
 const val LAYOUT_INDICATOR = 1
@@ -70,7 +71,7 @@ class DirectionsAdapter(private val viewType: Int) :
                     listener?.invoke(directionModel.id, it)
                 }
                 indicatorText.apply {
-                    text = String.format("%02d", directionModel.id + 1)
+                    text = String.format(Locale.US, "%02d", directionModel.id + 1)
                     setTypeface(
                         this.typeface,
                         if (isSelected) Typeface.BOLD else Typeface.NORMAL

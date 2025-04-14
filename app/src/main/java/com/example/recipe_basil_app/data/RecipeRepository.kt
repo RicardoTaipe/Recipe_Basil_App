@@ -1,12 +1,11 @@
 package com.example.recipe_basil_app.data
 
-import com.example.recipe_basil_app.network.response.Categories
 import com.example.recipe_basil_app.network.response.Category
-import com.example.recipe_basil_app.network.response.MealByCategory
-import com.example.recipe_basil_app.network.response.MealById
+import com.example.recipe_basil_app.network.response.Meal
+import com.example.recipe_basil_app.network.response.Recipe
 
 interface RecipeRepository {
     suspend fun getCategories(): List<Category>
-    suspend fun getRecipesByCategory(categoryId: String): MealByCategory
-    suspend fun getRecipeById(id: String): MealById
+    suspend fun getRecipesByCategory(categoryId: String): List<Meal>
+    suspend fun getRecipeById(id: String): Recipe?
 }

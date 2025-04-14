@@ -1,6 +1,5 @@
 package com.example.recipe_basil_app.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,25 +43,14 @@ class HomeViewModel(private val recipeRepository: RecipeRepository) : ViewModel(
 
     fun retrieveRecipesByCategory(item: String?) {
         viewModelScope.launch {
-            try {
-                val response = recipeRepository.getRecipesByCategory(item ?: "Beef")
-                val meals = response.meals.orEmpty()
-                _recipeByCategory.postValue(meals.take(minOf(meals.size, 5)))
-            } catch (t: Throwable) {
-                Log.d("RecipeContainerVModel", t.toString())
-            }
+            _recipeByCategory.postValue(recipeRepository.getRecipesByCategory(item ?: "Beef"))
         }
     }
 
     fun selectRecipe(position: Int) {
         val id = _recipeByCategory.value?.get(position)?.idMeal ?: return
         viewModelScope.launch {
-            try {
-                val recipe = recipeRepository.getRecipeById(id)
-                _recipe.value = recipe.meals?.first()
-            } catch (t: Throwable) {
-                Log.d("RecipeContainerVModel", t.toString())
-            }
+            _recipe.value = recipeRepository.getRecipeById(id)
         }
     }
 
