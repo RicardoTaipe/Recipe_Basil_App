@@ -28,15 +28,14 @@ class MenuAdapter : ListAdapter<Category, MenuViewHolder>(CategoryDiff) {
 class MenuViewHolder(
     private val binding: CategoryMenuItemBinding,
     private val itemClickListener: ((Category, position: Int) -> Unit)?
-) :
-    RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(category: Category?, selectedPos: Int) {
+    fun bind(category: Category, selectedPos: Int) {
         val isSelected = selectedPos == adapterPosition
 
         binding.apply {
             root.setOnClickListener {
-                itemClickListener?.invoke(category!!, adapterPosition)
+                itemClickListener?.invoke(category, adapterPosition)
             }
 
             mealName.apply {
@@ -47,8 +46,7 @@ class MenuViewHolder(
                     mealName.paintFlags and Paint.UNDERLINE_TEXT_FLAG.inv()
                 }
                 setTypeface(
-                    mealName.typeface,
-                    if (isSelected) Typeface.BOLD else Typeface.NORMAL
+                    mealName.typeface, if (isSelected) Typeface.BOLD else Typeface.NORMAL
                 )
             }
             this.category = category

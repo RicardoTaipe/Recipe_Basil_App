@@ -28,8 +28,10 @@ class MenuFragment : Fragment() {
         binding.categoriesRecyclerview.adapter = categoryAdapter
 
         categoryAdapter.itemClickListener = { category, position ->
+            val prevPosition = categoryAdapter.selectedPos
             categoryAdapter.selectedPos = position
-            categoryAdapter.notifyDataSetChanged()
+            categoryAdapter.notifyItemChanged(prevPosition)
+            categoryAdapter.notifyItemChanged(position)
 
             viewModel.selectCategory(category)
         }
