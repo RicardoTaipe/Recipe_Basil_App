@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class RecipeContainerFragment : Fragment() {
 
-    private val viewModel: HomeViewModel by activityViewModels ()
+    private val viewModel: HomeViewModel by activityViewModels()
     private lateinit var binding: FragmentRecipeContainerBinding
     private val pagerAdapter by lazy { RecipeCarouselAdapter() }
     private lateinit var viewPagerChangeCallback: OnPageChangeCallback
@@ -39,17 +39,17 @@ class RecipeContainerFragment : Fragment() {
     }
 
     private fun setupViewPager() {
-        binding.recipesCarousel.adapter = pagerAdapter
-        binding.recipesCarousel.offscreenPageLimit = 3
         viewPagerChangeCallback = object :
             OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 viewModel.selectRecipe(position)
             }
         }
-        binding.recipesCarousel.registerOnPageChangeCallback(viewPagerChangeCallback)
-        viewModel.slideOffset.observe(viewLifecycleOwner){
-            binding.expandMoreButton.alpha
+
+        binding.recipesCarousel.run {
+            adapter = pagerAdapter
+            offscreenPageLimit = 3
+            registerOnPageChangeCallback(viewPagerChangeCallback)
         }
     }
 
@@ -68,27 +68,20 @@ class RecipeContainerFragment : Fragment() {
             viewModel.retrieveRecipesByCategory(it.strCategory)
         }
 
-        // Initial fetch when fragment is created
+        // Initial fetch
         viewModel.retrieveRecipesByCategory(null)
 
     }
 
     private fun applyParallaxAnimation() {
-
         binding.recipesCarousel.setPageTransformer { page, position ->
-            val nameRecipe: TextView? = page.findViewById(R.id.meal_name)
-            val imageRecipe: ImageView? = page.findViewById(R.id.meal_image)
             when {
-                position < -1 ->  // Page is off-screen to the left
-                    page.alpha = 1f
-
-                position <= 1 -> { // Page is in the center
-                    nameRecipe?.translationX = position * page.width
-                    imageRecipe?.translationX = -position * page.width
+                position <= 1 -> {
+                    page.findViewById<TextView?>(R.id.meal_name)?.translationX =
+                        position * page.width
+                    page.findViewById<ImageView?>(R.id.meal_image)?.translationX =
+                        -position * page.width
                 }
-
-                else -> // Page is off-screen to the right
-                    page.alpha = 1f
             }
         }
     }

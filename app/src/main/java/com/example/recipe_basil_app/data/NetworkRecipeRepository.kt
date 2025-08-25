@@ -20,7 +20,7 @@ class NetworkRecipeRepository(private val retrofitService: RecipeApi) : RecipeRe
     override suspend fun getRecipesByCategory(categoryId: String): List<Meal> {
         return try {
             val response = retrofitService.filterByCategory(categoryId)
-            val meals = response.meals.orEmpty()
+            val meals = response.meals.orEmpty().shuffled()
             meals.take(minOf(meals.size, 5))
         } catch (t: Throwable) {
             emptyList()

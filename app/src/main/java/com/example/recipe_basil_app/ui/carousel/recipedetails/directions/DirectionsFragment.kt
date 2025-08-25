@@ -35,9 +35,9 @@ class DirectionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.recipe.observe(viewLifecycleOwner) {
-            adapter.submitList(it.getDirections())
-            indicatorAdapter.submitList(it.getDirections())
-
+            val directions = it.getDirections()
+            adapter.submitList(directions)
+            indicatorAdapter.submitList(directions)
         }
 
         binding.directionsList.adapter = adapter

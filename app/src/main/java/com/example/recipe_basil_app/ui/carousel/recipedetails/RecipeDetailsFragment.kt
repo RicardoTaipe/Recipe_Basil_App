@@ -1,5 +1,6 @@
 package com.example.recipe_basil_app.ui.carousel.recipedetails
 
+
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.recipe_basil_app.R
@@ -24,7 +26,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class RecipeDetailsFragment : Fragment() {
     private lateinit var binding: NewFragmentRecipeDetailsBinding
-    private lateinit var adapter: RecipeTabsAdapter
+    private lateinit var recipeTabsAdapter: RecipeTabsAdapter
     private lateinit var sheetBehavior: BottomSheetBehavior<MotionLayout>
     private lateinit var tabsSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var onBackPressedCallback: OnBackPressedCallback
@@ -44,13 +46,15 @@ class RecipeDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        adapter = RecipeTabsAdapter(this)
-        binding.pager.adapter = adapter
-
+        setupAdapter()
         setupBottomSheetBehaviors()
         setupOnBackPressedCallbacks()
         setupTabs()
+    }
+
+    private fun setupAdapter() {
+        recipeTabsAdapter = RecipeTabsAdapter(this)
+        binding.pager.adapter = recipeTabsAdapter
     }
 
     private fun setupBottomSheetBehaviors() {
@@ -59,20 +63,13 @@ class RecipeDetailsFragment : Fragment() {
                 addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
                         onBackPressedCallback.isEnabled = newState == STATE_EXPANDED
-
-                        binding.recipeDetailsContent.recipeBottomSheet.alpha =
-                            if (newState == STATE_COLLAPSED) 0f else 1f
-                        //binding.recipeTabs.alpha = if (newState == STATE_COLLAPSED) 0f else 0.95f
                     }
 
                     override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                        binding.recipeTabs.alpha = slideOffset
                         binding.recipeDetailsContent.recipeBottomSheet.progress = slideOffset
-                        //binding.recipesCarousel.alpha = 1f - slideOffset
-                        //binding.recipeTitle.alpha = 1f * slideOffset
-                        //binding.carouselContainer.alpha = 1f - slideOffset
                         recipeViewModel.setSlideOffset(slideOffset)
-                        //binding.titleApp.translationY = (binding.titleApp.height / 2) * -slideOffset
+                        binding.recipeTabs.isVisible = (slideOffset > 0.5f)
+                        binding.recipeDetailsContent.recipeBottomSheet.alpha = if (slideOffset > 0f) 1f else 0f
                     }
 
                 })

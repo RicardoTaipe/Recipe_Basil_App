@@ -28,8 +28,7 @@
             app:behavior_draggable="false"
             app:behavior_hideable="false"
             app:behavior_peekHeight="48dp"
-            android:background="?attr/colorSurface"
-            android:alpha="0"
+            android:visibility="gone"
             style="@style/Widget.Material3.BottomSheet"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             tools:showIn="@layout/fragment_new_home">

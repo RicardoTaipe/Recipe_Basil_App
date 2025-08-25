@@ -19,6 +19,7 @@
         app:behavior_hideable="false"
         style="@style/Widget.Material3.BottomSheet"
         android:elevation="0dp"
+        android:alpha="0"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         tools:behavior_peekHeight="@dimen/peek_height"
         app:layoutDescription="@xml/fragment_new_home_scene"

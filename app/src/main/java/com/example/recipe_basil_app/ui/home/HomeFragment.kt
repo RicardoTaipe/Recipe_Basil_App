@@ -46,31 +46,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-//    private fun animateWhenBottomSheetIsDragged() {
-//        sheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-//            override fun onStateChanged(bottomSheet: View, newState: Int) {
-//                //backCallback.isEnabled = newState == BottomSheetBehavior.STATE_EXPANDED
-//                binding.recipeDetailsContainer.recipeDetailsContainer.recipeBottomSheet.alpha = if(newState == BottomSheetBehavior.STATE_COLLAPSED ) 0f else 1f
-//                //TODO fix how to disable this!! this was working
-//                //before using Fragmetn receipe carousel container
-//                //binding.carouselContainer.recipesCarousel.isUserInputEnabled = newState != BottomSheetBehavior.STATE_EXPANDED
-//            }
-//
-//            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-//                Log.d("offset", slideOffset.toString())
-//                //binding.recipeBottomSheet.alpha = slideOffset
-//                binding.recipeDetailsContainer.recipeDetailsContainer.recipeBottomSheet.progress = slideOffset
-//                //binding.recipesCarousel.alpha = 1f - slideOffset
-//                //binding.recipeTitle.alpha = 1f * slideOffset
-//                //binding.carouselContainer.alpha = 1f - slideOffset
-//                binding.titleApp.translationY = (binding.titleApp.height / 2) * -slideOffset
-//            }
-//
-//        })
-//    }
-
-
     private fun modifyConstraintSets(motionLayout: MotionLayout) {
         val screenHeight = resources.displayMetrics.heightPixels
 
