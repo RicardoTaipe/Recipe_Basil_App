@@ -10,6 +10,12 @@ import com.example.recipe_basil_app.network.response.Meal
 
 class RecipeCarouselAdapter :
     ListAdapter<Meal, RecipeCarouselAdapter.ViewHolder>(MealDiffCallback) {
+    companion object {
+        const val INFINITE_SIZE = Int.MAX_VALUE
+    }
+    override fun getItemCount(): Int {
+        return if (currentList.isEmpty()) 0 else INFINITE_SIZE
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -18,7 +24,8 @@ class RecipeCarouselAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val realPosition = position % currentList.size
+        holder.bind(getItem(realPosition))
     }
 
     class ViewHolder(private val binding: CarouselItemBinding) :

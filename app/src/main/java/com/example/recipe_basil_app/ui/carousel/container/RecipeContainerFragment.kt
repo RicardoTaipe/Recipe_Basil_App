@@ -8,29 +8,28 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.recipe_basil_app.R
 import com.example.recipe_basil_app.databinding.FragmentRecipeContainerBinding
+import com.example.recipe_basil_app.ui.carousel.container.RecipeCarouselAdapter.Companion.INFINITE_SIZE
 import com.example.recipe_basil_app.ui.home.HomeViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.example.recipe_basil_app.util.EventObserver
 
 
 class RecipeContainerFragment : Fragment() {
 
     private val viewModel: HomeViewModel by activityViewModels()
-    private lateinit var binding: FragmentRecipeContainerBinding
+    private var _binding: FragmentRecipeContainerBinding? = null
+    private val binding get() = _binding!!
     private val pagerAdapter by lazy { RecipeCarouselAdapter() }
     private lateinit var viewPagerChangeCallback: OnPageChangeCallback
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentRecipeContainerBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View = FragmentRecipeContainerBinding.inflate(inflater, container, false).also {
+        _binding = it
+    }.root
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupViewPager()
@@ -39,38 +38,41 @@ class RecipeContainerFragment : Fragment() {
     }
 
     private fun setupViewPager() {
-        viewPagerChangeCallback = object :
-            OnPageChangeCallback() {
+        viewPagerChangeCallback = object : OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                viewModel.selectRecipe(position)
+                pagerAdapter.currentList.takeIf { it.isNotEmpty() }?.let { list ->
+                    viewModel.selectRecipe(position % list.size)
+                }
             }
         }
 
-        binding.recipesCarousel.run {
+        binding.recipesCarousel.apply {
             adapter = pagerAdapter
-            offscreenPageLimit = 3
             registerOnPageChangeCallback(viewPagerChangeCallback)
+            offscreenPageLimit = 2
         }
     }
 
     private fun observeViewModel() {
         viewModel.recipeByCategory.observe(viewLifecycleOwner) { recipes ->
-            recipes?.let {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    // Wait for menu drawer animation to end to allow ViewPager refresh.
-                    delay(200)
-                    pagerAdapter.submitList(it)
+            recipes?.let { list ->
+                pagerAdapter.submitList(list.toList()) {
+                    if (list.isNotEmpty()) {
+                        val centerStart = (INFINITE_SIZE / 2) - (INFINITE_SIZE / 2 % list.size)
+                        binding.recipesCarousel.setCurrentItem(centerStart, false)
+                    }
                 }
             }
         }
-
-        viewModel.selectedCategory.observe(viewLifecycleOwner) {
-            viewModel.retrieveRecipesByCategory(it.strCategory)
-        }
+        viewModel.animationFinished.observe(viewLifecycleOwner, EventObserver {
+            pagerAdapter.submitList(null)
+            viewModel.retrieveRecipesByCategory(viewModel.selectedCategory.value?.strCategory.orEmpty())
+        })
 
         // Initial fetch
-        viewModel.retrieveRecipesByCategory(null)
-
+        if (viewModel.recipeByCategory.value == null) {
+            viewModel.retrieveRecipesByCategory()
+        }
     }
 
     private fun applyParallaxAnimation() {
@@ -86,8 +88,9 @@ class RecipeContainerFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
         binding.recipesCarousel.unregisterOnPageChangeCallback(viewPagerChangeCallback)
+        super.onDestroyView()
+        _binding = null
     }
 }

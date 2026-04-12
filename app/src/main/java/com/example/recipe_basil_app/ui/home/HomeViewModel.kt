@@ -13,6 +13,7 @@ import com.example.recipe_basil_app.data.RecipeRepository
 import com.example.recipe_basil_app.network.response.Category
 import com.example.recipe_basil_app.network.response.Meal
 import com.example.recipe_basil_app.network.response.Recipe
+import com.example.recipe_basil_app.util.Event
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val recipeRepository: RecipeRepository) : ViewModel() {
@@ -31,6 +32,9 @@ class HomeViewModel(private val recipeRepository: RecipeRepository) : ViewModel(
     private val _slideOffset = MutableLiveData<Float>()
     val slideOffset: LiveData<Float> = _slideOffset
 
+    private val _animationFinished = MutableLiveData<Event<Unit>>()
+    val animationFinished: LiveData<Event<Unit>> get() = _animationFinished
+
     init {
         viewModelScope.launch {
             _categories.value = recipeRepository.getCategories()
@@ -41,9 +45,9 @@ class HomeViewModel(private val recipeRepository: RecipeRepository) : ViewModel(
         _selectedCategory.value = category
     }
 
-    fun retrieveRecipesByCategory(item: String?) {
+    fun retrieveRecipesByCategory(item: String = "Beef") {
         viewModelScope.launch {
-            _recipeByCategory.postValue(recipeRepository.getRecipesByCategory(item ?: "Beef"))
+            _recipeByCategory.postValue(recipeRepository.getRecipesByCategory(item))
         }
     }
 
@@ -56,6 +60,10 @@ class HomeViewModel(private val recipeRepository: RecipeRepository) : ViewModel(
 
     fun setSlideOffset(offset: Float) {
         _slideOffset.value = offset
+    }
+
+    fun notifyAnimationFinished() {
+        _animationFinished.value = Event(Unit)
     }
 
     companion object {
