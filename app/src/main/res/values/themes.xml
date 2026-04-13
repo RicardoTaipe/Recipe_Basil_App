@@ -19,88 +19,94 @@
         <item name="colorOnBackground">@color/bottle_green</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/egg_shell</item>
-        <item name="android:windowLightStatusBar" >true</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- Fonts-->
         <item name="android:fontFamily">@font/montserrat_regular</item>
-        <item name="fontFamily">@font/montserrat_regular</item>
+
+        <item name="textAppearanceDisplayLarge">@style/TextAppearance.Recipe.DisplayLarge</item>
+        <item name="textAppearanceDisplayMedium">@style/TextAppearance.Recipe.DisplayMedium</item>
+        <item name="textAppearanceDisplaySmall">@style/TextAppearance.Recipe.DisplayLarge</item>
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Recipe.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Recipe.HeadlineMedium</item>
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.Recipe.HeadlineSmall</item>
+
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.Recipe.TitleLarge</item>
+        <item name="textAppearanceTitleMedium">@style/TextAppearance.Recipe.TitleMedium</item>
+        <item name="textAppearanceTitleSmall">@style/TextAppearance.Recipe.TitleSmall</item>
+
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Recipe.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Recipe.BodyMedium</item>
+        <item name="textAppearanceBodySmall">@style/TextAppearance.Recipe.BodyMedium</item>
+
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.Recipe.LabelLarge</item>
+        <item name="textAppearanceLabelMedium">@style/TextAppearance.Recipe.LabelMedium</item>
+        <item name="textAppearanceLabelSmall">@style/TextAppearance.Recipe.LabelSmall</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
-        <item name="fontFamily">@font/montserrat_semibold</item>
+    <style name="TextAppearance.Recipe.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
         <item name="android:fontFamily">@font/montserrat_semibold</item>
         <item name="android:textSize">96sp</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
-        <item name="fontFamily">@font/montserrat_semibold</item>
+    <style name="TextAppearance.Recipe.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
         <item name="android:fontFamily">@font/montserrat_semibold</item>
         <item name="android:textSize">60sp</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="fontFamily">@font/montserrat_semibold</item>
+    <style name="TextAppearance.Recipe.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
         <item name="android:fontFamily">@font/montserrat_semibold</item>
         <item name="android:textSize">48sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
-        <item name="fontFamily">@font/montserrat_semibold</item>
+    <style name="TextAppearance.Recipe.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
         <item name="android:fontFamily">@font/montserrat_semibold</item>
         <item name="android:textSize">34sp</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+    <style name="TextAppearance.Recipe.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="fontFamily">@font/montserrat_medium</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="fontFamily">@font/lekton_bold</item>
+    <style name="TextAppearance.Recipe.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:fontFamily">@font/lekton_bold</item>
         <item name="android:textSize">21sp</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="fontFamily">@font/lekton_bold</item>
+    <style name="TextAppearance.Recipe.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
         <item name="android:fontFamily">@font/lekton_bold</item>
         <item name="android:textSize">17sp</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="fontFamily">@font/lekton_bold</item>
+    <style name="TextAppearance.Recipe.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
         <item name="android:fontFamily">@font/lekton_bold</item>
         <item name="android:textSize">15sp</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Body1" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/montserrat_semibold</item>
+    <style name="TextAppearance.Recipe.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
         <item name="android:fontFamily">@font/montserrat_semibold</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Body2" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="fontFamily">@font/montserrat_regular</item>
+    <style name="TextAppearance.Recipe.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Button" parent="TextAppearance.MaterialComponents.Button">
-        <item name="fontFamily">@font/montserrat_bold</item>
+    <style name="TextAppearance.Recipe.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
         <item name="android:fontFamily">@font/montserrat_bold</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Caption" parent="TextAppearance.MaterialComponents.Caption">
-        <item name="fontFamily">@font/montserrat_medium</item>
+    <style name="TextAppearance.Recipe.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="TextAppearance.Recipe.Overline" parent="TextAppearance.MaterialComponents.Overline">
-        <item name="fontFamily">@font/montserrat_regular</item>
+    <style name="TextAppearance.Recipe.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
         <item name="android:fontFamily">@font/montserrat_regular</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">10sp</item>

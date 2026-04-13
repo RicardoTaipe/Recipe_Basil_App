@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/description_text"
-            style="@style/TextAppearance.Recipe.Headline6"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:textColor="?attr/colorOnPrimary"

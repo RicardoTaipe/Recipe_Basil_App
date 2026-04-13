@@ -4,7 +4,7 @@
 
     <TextView
         android:id="@+id/indicator_text"
-        style="@style/TextAppearance.Recipe.Body1"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"

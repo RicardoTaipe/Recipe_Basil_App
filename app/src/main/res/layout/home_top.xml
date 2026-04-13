@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:text="@string/basil"
     android:textAlignment="center"
-    android:textAppearance="@style/TextAppearance.Recipe.Headline2"
+    android:textAppearance="?attr/textAppearanceDisplayMedium"
     android:textStyle="bold"
     android:textColor="?attr/colorPrimary"
     app:layout_constraintEnd_toEndOf="parent"
