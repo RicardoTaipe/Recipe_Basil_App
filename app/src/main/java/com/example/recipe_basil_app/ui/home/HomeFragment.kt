@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
 
     private fun animateTitle() {
         viewModel.slideOffset.observe(viewLifecycleOwner) {
-            binding.titleApp.translationY = (binding.titleApp.height / 2) * -it
+            binding.titleApp.root.translationY = (binding.titleApp.root.height / 2) * -it
         }
     }
 

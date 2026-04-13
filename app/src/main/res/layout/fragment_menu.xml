@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:paddingVertical="100dp"
         tools:showIn="@layout/fragment_new_home"
-        tools:visibility="gone">
+        tools:visibility="visible">
 
         <TextView
             android:id="@+id/subheadline"
@@ -38,7 +38,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/categories_recyclerview"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
