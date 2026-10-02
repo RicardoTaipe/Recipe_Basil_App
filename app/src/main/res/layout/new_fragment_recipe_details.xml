@@ -21,6 +21,7 @@
             layout="@layout/recipe_details_content"
             app:recipe="@{viewModel.recipe}"/>
 
+        <!-- Standard Bottomsheet for Tabs -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/recipe_tabs"
             android:layout_width="match_parent"
@@ -29,7 +30,10 @@
             app:behavior_hideable="false"
             app:behavior_peekHeight="48dp"
             android:visibility="gone"
+            tools:visibility="visible"
             style="@style/Widget.Material3.BottomSheet"
+            app:shapeAppearanceOverlay="@null"
+            app:paddingBottomSystemWindowInsets="false"
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
             tools:showIn="@layout/fragment_new_home">
 
@@ -42,7 +46,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:tabIndicatorAnimationMode="elastic"
                 app:tabMode="fixed"
-                app:tabTextAppearance="?attr/textAppearanceLabelLarge">
+                app:tabTextAppearance="?attr/textAppearanceLabelMedium">
             </com.google.android.material.tabs.TabLayout>
 
             <androidx.viewpager2.widget.ViewPager2
@@ -54,6 +58,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tab_layout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <!-- End Standard Bottomsheet for Tabs -->
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

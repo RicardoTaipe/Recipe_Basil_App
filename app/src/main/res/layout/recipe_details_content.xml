@@ -18,10 +18,14 @@
         android:visibility="visible"
         app:behavior_hideable="false"
         style="@style/Widget.Material3.BottomSheet"
+        app:shapeAppearanceOverlay="@null"
         android:elevation="0dp"
         android:alpha="0"
+        tools:alpha="1"
+        tools:motionProgress="1"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         tools:behavior_peekHeight="@dimen/peek_height"
+        app:paddingBottomSystemWindowInsets="false"
         app:layoutDescription="@xml/fragment_new_home_scene"
         tools:showIn="@layout/fragment_new_home">
 
@@ -43,7 +47,7 @@
 
         <TextView
             android:id="@+id/recipe_title"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/title_padding"
             android:ellipsize="end"

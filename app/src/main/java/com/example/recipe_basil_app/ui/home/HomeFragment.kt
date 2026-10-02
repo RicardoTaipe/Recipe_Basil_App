@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.recipe_basil_app.R
@@ -29,6 +32,15 @@ class HomeFragment : Fragment() {
         modifyConstraintSets(binding.motion)
         animateTitle()
         moveFromMenuToCarousel()
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+            v.updatePadding(
+                left = bars.left,
+                right = bars.right,
+                bottom = bars.bottom,
+            )
+            insets
+        }
     }
 
     private fun animateTitle() {
